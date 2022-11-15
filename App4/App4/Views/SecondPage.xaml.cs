@@ -15,25 +15,29 @@ namespace App4.Views
         public SecondPage()
         {
             InitializeComponent();
+            GetItemsToCollection();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
-            collectionView.ItemsSource = App.DataBase.GetBooks();
+            collectionView.ItemsSource = new List<Book>();
+            collectionView.ItemsSource = await App.Database.GetBooks();
             collectionView.SelectedItem = null;
             base.OnAppearing();
+        }
+
+        private async void GetItemsToCollection()
+        {
+            collectionView.ItemsSource = await App.Database.GetBooks();
         }
 
         private void collectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (collectionView.SelectedItem != null)
             {
-                Shell.Current.GoToAsync($"{nameof(BookDetailPage)}" + $"?{nameof(BookDetailPage.BookId)}=" + $"{((Book)collectionView.SelectedItem).Id}");
+                Shell.Current.GoToAsync($"{nameof(BookDetailPage)}?{nameof(BookDetailPage.IdBook)}={((Book)collectionView.SelectedItem).Id}");
 
             }
         }
-
-       
-
     }
 }

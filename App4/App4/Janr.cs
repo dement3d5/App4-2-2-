@@ -4,14 +4,13 @@ using System.Text;
 
 namespace App4
 {
-    public class Book
+    public class Janr
     {
         public int Id { get; set; }
 
-        public int JanrId { get; set; }
-
         public string Name { get; set; }
 
-        public string JanrName { get; set; }   
+       
+       
     }
 }
